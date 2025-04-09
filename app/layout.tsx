@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ConvexClientProvider from "@/providers/ConvexClientProvider";
+import ConvexClientProvider from "./ConvexClientProvider";
 
 
 
@@ -17,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body cz-shortcut-listen="true" >
-        <ConvexClientProvider>
-        {children}
-        </ConvexClientProvider>
+      <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
   );

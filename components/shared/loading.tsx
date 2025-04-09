@@ -2,7 +2,12 @@ import React from 'react'
 
 const loading = () => {
   return (
-    <div>loading...</div>
+    <>
+    <main className=' min-w-screen min-h-screen flex justify-center items-center'>
+    loading...
+    </main>
+   
+    </>
   )
 }
 

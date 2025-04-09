@@ -4,5 +4,5 @@ export default {
       domain: "https://native-kingfish-4.clerk.accounts.dev",
       applicationID: "convex",
     },
-  ]
+  ],
 };
