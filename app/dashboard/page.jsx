@@ -4,7 +4,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import Loading from "../../components/shared/Loading"
+import Loading from "@/components/Loading";
 export default function DashboardPage() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { user } = useUser();
