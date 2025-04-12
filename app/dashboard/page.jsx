@@ -16,7 +16,7 @@ export default function DashboardPage() {
   // Try-catch to handle potential errors with the query
   let userData;
   try {
-    userData = useQuery(api.users.getUser, 
+    userData = useQuery(api.user.getUser, 
       user?.id ? { clerkId: user.id } : "skip"
     );
   } catch (error) {

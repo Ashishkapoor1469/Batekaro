@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import ConvexClientProvider from "./ConvexClientProvider";
 import UserSync from "./component/UserSync";
+import SideBarLg from "@/components/shared/SideBar/SideBarLg";
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "CHATING APP",
@@ -18,9 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}  cz-shortcut-listen="true">
+      <body className="flex" cz-shortcut-listen="true">
         <ConvexClientProvider>
           <UserSync />
+         <SideBarLg/>
           {children}
         </ConvexClientProvider>
       </body>
