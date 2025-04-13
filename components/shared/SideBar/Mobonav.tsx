@@ -8,15 +8,14 @@ import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
-export default function SideBarLg() {
+export default function MoboNav() {
     const paths = useNavigation();
     return(
         <>
         <SignedIn>
-        <main className="min-h-screen p-4 lg:block hidden">
-      <Card className="hidden lg:flex lg:flex-col lg:justify-between lg:items-center lg:h-full lg:w-16 lg:px-2 lg:py-4">
-<nav>  
-    <ul className="flex flex-col items-center gap-4">
+      <Card className="fixed bottom-4 w-[calc(100vw-32px)] flex items-center h-16 p-2 lg:hidden">
+<nav className="w-full h-full">  
+    <ul className="flex h-full w-full justify-evenly items-center">
        {paths.map((path,id)=>{
         return<li key={id} className="relative">
             <Link href={path.href}>
@@ -34,19 +33,16 @@ export default function SideBarLg() {
             </Link>
         </li>
        })}
-       
+       <li> <ModeToggle/></li>
+       <li><UserButton/></li>
 </ul> 
 </nav>
-<div className="flex flex-col items-center gap-4 ">
-    <ModeToggle/>
-<UserButton/>
-</div>
       </Card>
-     </main></SignedIn>
-     <SignedOut>
+      </SignedIn>
+      <SignedOut>
         <>
         </>
-     </SignedOut>
+      </SignedOut>
         </>
     )
 }

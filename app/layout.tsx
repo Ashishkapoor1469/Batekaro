@@ -3,8 +3,9 @@ import "./globals.css";
 import ConvexClientProvider from "./ConvexClientProvider";
 import UserSync from "./component/UserSync";
 import SideBarLg from "@/components/shared/SideBar/SideBarLg";
-
-
+import { ThemeProvider } from "@/components/theme-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import MoboNav from "@/components/shared/SideBar/Mobonav";
 
 export const metadata: Metadata = {
   title: "CHATING APP",
@@ -17,13 +18,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="flex" cz-shortcut-listen="true">
-        <ConvexClientProvider>
-          <UserSync />
-         <SideBarLg/>
-          {children}
-        </ConvexClientProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className="flex min-h-screen min-w-screen"
+        cz-shortcut-listen="true"
+      >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ConvexClientProvider>
+            <UserSync />
+            <TooltipProvider>
+             <div className="flex lg:flex-row flex-col-reverse w-full">
+            <div className="h-full flex justify-center">
+              <MoboNav/>
+            <SideBarLg />
+            </div>
+            {children}
+            </div>
+              </TooltipProvider>
+          </ConvexClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
