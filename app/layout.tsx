@@ -6,6 +6,7 @@ import SideBarLg from "@/components/shared/SideBar/SideBarLg";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import MoboNav from "@/components/shared/SideBar/Mobonav";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "CHATING APP",
@@ -27,6 +28,7 @@ export default function RootLayout({
           <ConvexClientProvider>
             <UserSync />
             <TooltipProvider>
+              <Toaster richColors/>
              <div className="flex lg:flex-row flex-col-reverse w-full">
             <div className="lg:h-full flex justify-center">
               <MoboNav/>
