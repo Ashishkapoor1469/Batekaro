@@ -8,9 +8,9 @@ import React from "react";
 
 type Props = {
   id: Id<"requests">;
-  imageUrl: string;
+  imageUrl: string |undefined;
   email: string;
-  username: string;
+  username: string|undefined;
 };
 
 const Request = ({  imageUrl, email, username }: Props) => {
