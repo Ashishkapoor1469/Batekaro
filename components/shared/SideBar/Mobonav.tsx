@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { useConvresation } from "@/hooks/useConversation";
+import { Badge } from "@/components/ui/badge";
 
 export default function MoboNav() {
   const paths = useNavigation();
@@ -37,6 +38,7 @@ export default function MoboNav() {
                           >
                             {path.icon}
                           </Button>
+                          {path.count ? <Badge className="absolute left-7 bottom-6">{path.count}</Badge>:null}
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>{path.name}</p>

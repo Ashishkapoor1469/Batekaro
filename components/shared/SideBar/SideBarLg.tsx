@@ -7,6 +7,7 @@ import { useNavigation } from "@/hooks/useNavigation";
 import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function SideBarLg() {
     const paths = useNavigation();
@@ -26,6 +27,7 @@ export default function SideBarLg() {
                     {path.icon}
 
                 </Button>
+                {path.count ? <Badge className="absolute left-6 bottom-7 px-2">{path.count}</Badge>:null}
                 </TooltipTrigger>
                 <TooltipContent>
                     <p>{path.name}</p>
