@@ -28,7 +28,7 @@ export default function RootLayout({
             <UserSync />
             <TooltipProvider>
              <div className="flex lg:flex-row flex-col-reverse w-full">
-            <div className="h-full flex justify-center">
+            <div className="lg:h-full flex justify-center">
               <MoboNav/>
             <SideBarLg />
             </div>
