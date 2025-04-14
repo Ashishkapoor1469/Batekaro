@@ -13,7 +13,7 @@ import { toast } from "sonner";
 type Props = {
   id: Id<"requests">;
   imageUrl: string|undefined;
-  email: string |undefined;
+  email: string ;
   username: string |undefined;
 };
 

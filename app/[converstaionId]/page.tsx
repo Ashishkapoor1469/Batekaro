@@ -10,23 +10,14 @@ import Header from "./_components/Header"
 import Body from "./_components/body/Body"
 import ChatInput from "./_components/input/ChatInput"
 import { useParams } from "next/navigation"
-import { useMemo } from "react"
 
 const Page = () => {
   const params = useParams()
   const conversationId = params.conversationId as string
 
-  const conversationQuery = useMemo(() => {
-    if (conversationId) {
-      return {
-        query: api.converstaion.get,
-        args: { id: conversationId as Id<"conversations"> },
-      }
-    }
-    return null
-  }, [conversationId])
 
-  const conversation = useQuery(conversationQuery?.query, conversationQuery?.args)
+
+ const conversation = useQuery(api.converstaion.get,{id: conversationId as Id<"conversations">})
 
   const conversations = useQuery(api.conversations.getAll)
 
