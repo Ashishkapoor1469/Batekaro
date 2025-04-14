@@ -14,6 +14,8 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as _utils from "../_utils.js";
+import type * as conversatation from "../conversatation.js";
+import type * as converstaion from "../converstaion.js";
 import type * as request from "../request.js";
 import type * as requests from "../requests.js";
 import type * as user from "../user.js";
@@ -28,6 +30,8 @@ import type * as user from "../user.js";
  */
 declare const fullApi: ApiFromModules<{
   _utils: typeof _utils;
+  conversatation: typeof conversatation;
+  converstaion: typeof converstaion;
   request: typeof request;
   requests: typeof requests;
   user: typeof user;

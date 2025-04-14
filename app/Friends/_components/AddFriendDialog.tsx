@@ -39,7 +39,7 @@ const AddFriendFormSchema = z.object({
     .email("Invalid email address"),
 });
 const AddFriendDialog = () => {
-  const { mutate: createRequest,  } = useMutationState(
+  const { mutate: createRequest, pending } = useMutationState(
     api.request.create
   );
   const form = useForm<z.infer<typeof AddFriendFormSchema>>({
@@ -102,7 +102,7 @@ const AddFriendDialog = () => {
               )}
             />
             <DialogFooter>
-              <Button  disabled={false} type="submit">
+              <Button  disabled={pending} type="submit">
                 Send
               </Button>
             </DialogFooter>
