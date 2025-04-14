@@ -18,7 +18,7 @@ type Props = {
 
 const Page = ({ params: { conversationId } }: Props) => {
   const conversation = useQuery(api.converstaion.get, { id: conversationId });
-  const conversations = useQuery(api.conversatation.getAll); // Replace `getAll` with the correct query name
+  const conversations = useQuery(api.conversations.getAll); 
   return (
     <div className="py-4 flex w-full h-full lg:pe-4 gap-4">
       <div className="lg:block hidden">

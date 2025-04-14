@@ -32,7 +32,7 @@ export const getAll = query({
       }))
 
 
-      const conversationWithDetails = await Promise.all(conversations.map(async(conversation)=>{
+      const conversationWithDetails = await Promise.all(conversations.map(async(conversation,index)=>{
         const allconversationMemberships = await ctx.db.query("conversationMembers").withIndex("by_conversationId",q=>q.eq("conversationId",conversation?._id)).collect();
         if(conversation.isGroup){
             return {conversation}

@@ -9,7 +9,7 @@ import { api } from "@/convex/_generated/api";
 import { Loader2 } from "lucide-react";
 import DMConversation from "./_components/DMConversation";
 export default function Home() {
-  const conversations = useQuery(api.conversatation.get);
+  const conversations = useQuery(api.conversations.getAll);
   return (
     <>
       <SignedOut>
