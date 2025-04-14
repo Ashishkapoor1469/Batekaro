@@ -1,13 +1,13 @@
-import React from 'react'
+// import React from 'react'
 
-type Props = {
+// type Props = {
     
-}
+// }
 
-const ChatInput = (props: Props) => {
-  return (
-    <div>ChatInput</div>
-  )
-}
+// const ChatInput = (props: Props) => {
+//   return (
+//     <div>ChatInput</div>
+//   )
+// }
 
-export default ChatInput
+// export default ChatInput

@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 
-type Props = {}
+// type Props = {}
 
-const Body = (props: Props) => {
-  return (
-    <div>Body</div>
-  )
-}
+// const Body = (props: Props) => {
+//   return (
+//     <div>Body</div>
+//   )
+// }
 
-export default Body
+// export default Body
