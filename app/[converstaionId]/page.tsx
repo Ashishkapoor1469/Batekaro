@@ -26,7 +26,7 @@ const Page = () => {
     return null
   }, [conversationId])
 
-  const conversation = conversationQuery ? useQuery(conversationQuery.query, conversationQuery.args) :null
+  const conversation = useQuery(conversationQuery?.query, conversationQuery?.args)
 
   const conversations = useQuery(api.conversations.getAll)
 
