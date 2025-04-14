@@ -11,12 +11,12 @@ import Header from "./_components/Header";
 import Body from "./_components/body/Body";
 import ChatInput from "./_components/input/ChatInput";
 type Props = {
-  Params: {
+  params: {
     conversationId: Id<"conversations">;
   };
 };
 
-const Page = ({ Params: { conversationId } }: Props) => {
+const Page = ({ params: { conversationId } }: Props) => {
   const conversation = useQuery(api.converstaion.get, { id: conversationId });
   const conversations = useQuery(api.conversations.getAll);
   return (
