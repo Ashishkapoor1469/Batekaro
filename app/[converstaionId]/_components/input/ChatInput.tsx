@@ -1,13 +1,13 @@
-// import React from 'react'
+"use client"
+import { Card } from "@/components/ui/card"
+import type React from "react"
 
-// type Props = {
-    
-// }
+const ChatInput = () => {
+return (
+    <Card className="w-full p-4 flex flex-row items-center gap-4 rounded-lg">
+     Chat input
+    </Card>
+  )
+}
 
-// const ChatInput = (props: Props) => {
-//   return (
-//     <div>ChatInput</div>
-//   )
-// }
-
-// export default ChatInput
+export default ChatInput
