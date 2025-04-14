@@ -1,60 +1,51 @@
-import { ConvexError, v } from "convex/values"
-import { query } from "./_generated/server"
-import { getUserByClerkId } from "./_utils"
+import { ConvexError, v } from "convex/values";
+import { query } from "./_generated/server";
+import { getUserByClerkId } from "./_utils";
 
 export const get = query({
   args: {
-    id: v.id("conversations"),
-  },
+  id: v.id('conversations')
+},
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
+    const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("user not authenticated")
+      throw new Error("user not authenticated");
     }
     const currentUser = await getUserByClerkId({
       ctx,
       clerkId: identity.subject,
-    })
+    });
     if (!currentUser) {
-      throw new ConvexError("user not found")
+      throw new ConvexError("user not found");
     }
-    const conversation = await ctx.db.get(args.id)
+    const conversation = await ctx.db.get(args.id);
 
     if (!conversation) {
-      return null
+      throw new ConvexError("conversation not found");
     }
 
     const memberships = await ctx.db
       .query("conversationMembers")
       .withIndex("by_memberId_conversationId", (q) =>
-        q.eq("memberId", currentUser._id).eq("conversationId", conversation._id),
+        q.eq("memberId", currentUser._id).eq("conversationId", conversation._id)
       )
-      .unique()
+      .unique();
 
     if (!memberships) {
-      throw new ConvexError("you are not member of this conversation")
+      throw new ConvexError(" you are not member of this conversation");
     }
 
     const allConversationMemberships = await ctx.db
       .query("conversationMembers")
       .withIndex("by_conversationId", (q) => q.eq("conversationId", args.id))
-      .collect()
+      .collect();
 
     if (!conversation.isGroup) {
       const otherMemberships = allConversationMemberships.filter(
-        (membership) => membership.memberId !== currentUser._id,
-      )[0]
-
-      if (!otherMemberships) {
-        return {
-          ...conversation,
-          otherMember: null,
-          otherMembers: null,
-        }
-      }
-
-      const otherMemberDetails = await ctx.db.get(otherMemberships.memberId)
+        (membership) => membership.memberId !== currentUser._id
+      )[0];
+      const otherMemberDetails = await ctx.db.get(otherMemberships.memberId);
 
       return {
         ...conversation,
@@ -63,14 +54,7 @@ export const get = query({
           lastSeenMessageId: otherMemberships.lastSeenMessageId,
         },
         otherMembers: null,
-      }
-    }
-
-    // Return the conversation for group chats
-    return {
-      ...conversation,
-      otherMember: null,
-      otherMembers: null,
+      };
     }
   },
-})
+});

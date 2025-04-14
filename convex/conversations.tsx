@@ -1,64 +1,61 @@
-import { ConvexError } from "convex/values"
-import { query } from "./_generated/server"
-import { getUserByClerkId } from "./_utils"
+import { ConvexError } from "convex/values";
+import { query } from "./_generated/server";
+import { getUserByClerkId } from "./_utils";
 
 export const getAll = query({
   args: {},
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
+    const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
-      throw new Error("user not authenticated")
+      throw new Error("user not authenticated");
     }
     const currentUser = await getUserByClerkId({
       ctx,
       clerkId: identity.subject,
-    })
+    });
     if (!currentUser) {
-      throw new ConvexError("user not found")
+      throw new ConvexError("user not found");
     }
-    const converstaionMemberships = await ctx.db
+
+    const conversationMemberships = await ctx.db
       .query("conversationMembers")
       .withIndex("by_memberId", (q) => q.eq("memberId", currentUser._id))
-      .collect()
-
-    if (converstaionMemberships.length === 0) {
-      return []
-    }
+      .collect();
 
     const conversations = await Promise.all(
-      converstaionMemberships.map(async (membership) => {
-        const conversation = await ctx.db.get(membership.conversationId)
-        return conversation
-      }),
-    ).then((results) => results.filter(Boolean)) // Filter out any null results
+      conversationMemberships?.map(async (membership) => {
+        const conversation = await ctx.db.get(membership.conversationId);
+
+        if (!conversation) {
+          throw new ConvexError("conversation not found");
+        }
+        return conversation;
+      })
+    );
 
     const conversationWithDetails = await Promise.all(
-      conversations.map(async (conversation) => {
-        if (!conversation) return null
-
+      conversations.map(async (conversation, index) => {
         const allconversationMemberships = await ctx.db
           .query("conversationMembers")
-          .withIndex("by_conversationId", (q) => q.eq("conversationId", conversation._id))
-          .collect()
-
+          .withIndex("by_conversationId", (q) =>
+            q.eq("conversationId", conversation?._id)
+          )
+          .collect();
         if (conversation.isGroup) {
-          return { conversation }
+          return { conversation };
         } else {
           const otherMemberships = allconversationMemberships.filter(
-            (membership) => membership.memberId !== currentUser._id,
-          )[0]
+            (membership) => membership.memberId !== currentUser._id
+          )[0];
 
-          if (!otherMemberships) {
-            return { conversation, otherMembers: null }
-          }
+          const otherMembers = await ctx.db.get(otherMemberships.memberId);
 
-          const otherMembers = await ctx.db.get(otherMemberships.memberId)
-          return { conversation, otherMembers }
+          return { conversation, otherMembers };
         }
-      }),
-    ).then((results) => results.filter(Boolean)) // Filter out any null results
+      })
+    );
 
-    return conversationWithDetails
+    return conversationWithDetails;
   },
-})
+});
