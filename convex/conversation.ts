@@ -4,9 +4,10 @@ import { getUserByClerkId } from "./_utils";
 
 export const get = query({
   args: {
-  id: v.id('conversations')
-},
+    id: v.id("conversations"),
+  },
   handler: async (ctx, args) => {
+    
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -19,6 +20,7 @@ export const get = query({
     if (!currentUser) {
       throw new ConvexError("user not found");
     }
+
     const conversation = await ctx.db.get(args.id);
 
     if (!conversation) {

@@ -58,7 +58,7 @@ export default function Home() {
                 })
               )
             ) : (
-              <Loader2 />
+              <Loader2 className="w-8 h-8 animate-spin" />
             )}
           </ItemList>
           <ConverstaionFallback />

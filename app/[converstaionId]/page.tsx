@@ -10,10 +10,16 @@ import { Id } from "@/convex/_generated/dataModel";
 import Header from "./_components/Header";
 import Body from "./_components/body/Body";
 import ChatInput from "./_components/input/ChatInput";
+type Props = {
+  params: {
+    conversationId: Id<"conversations">;
+  };
+};
+const Page = ({ params: { conversationId } }: Props) => {
 
-
-const Page = (conversationId:Id<"conversations">) => {
-  const conversation = useQuery(api.converstaion.get, { id: conversationId });
+  console.log("conversationId:", conversationId); 
+  
+  const conversation = useQuery(api.conversation.get, { id: conversationId });
   const conversations = useQuery(api.conversations.getAll);
   return (
     <div className="py-4 flex w-full h-full lg:pe-4 gap-4">
@@ -37,36 +43,36 @@ const Page = (conversationId:Id<"conversations">) => {
               })
             )
           ) : (
-            <Loader2 />
+            <Loader2 className="h-10 w-10 animate-spin" />
           )}
         </ItemList>
       </div>
       {conversation === undefined ? (
-        <div className="w-full h-full flex items-center justify-center">
-          <Loader2 className="h-8 w-8" />
-        </div>
-      ) : conversation === null ? (
-        <p className="w-full h-full flex items-center justify-center">
-          Conversation not found
-        </p>
-      ) : (
-        <ConverstaionContainer>
-          <Header
-            name={
-              (conversation.isGroup
-                ? conversation.name
-                : conversation.otherMember.name) || ""
-            }
-            imageUrl={
-              conversation.isGroup
-                ? undefined
-                : conversation.otherMember.imageUrl
-            }
-          />
-          <Body />
-          <ChatInput />
-        </ConverstaionContainer>
-      )}
+  <div className="w-full h-full flex items-center justify-center">
+    <Loader2 className="h-8 w-8 animate-spin" />
+  </div>
+) : conversation === null ? (
+  <p className="w-full h-full flex items-center justify-center">
+    Conversation not found
+  </p>
+) : (
+  <ConverstaionContainer>
+    <Header
+      name={
+        (conversation.isGroup
+          ? conversation.name
+          : conversation.otherMember?.name) || "Unknown"
+      }
+      imageUrl={
+        conversation.isGroup
+          ? undefined
+          : conversation.otherMember?.imageUrl
+      }
+    />
+    <Body />
+    <ChatInput />
+  </ConverstaionContainer>
+)}
     </div>
   );
 };
