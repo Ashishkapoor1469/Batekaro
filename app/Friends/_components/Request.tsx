@@ -12,9 +12,9 @@ import { toast } from "sonner";
 
 type Props = {
   id: Id<"requests">;
-  imageUrl: string;
-  email: string;
-  username: string;
+  imageUrl: string|undefined;
+  email: string |undefined;
+  username: string |undefined;
 };
 
 const Request = ({ id, imageUrl, email, username }: Props) => {
