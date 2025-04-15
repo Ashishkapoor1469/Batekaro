@@ -1,7 +1,7 @@
 "use client";
 import ConverstaionContainer from "@/components/shared/converstaion/ConverstaionContainer";
 import ItemList from "@/components/shared/item-list/ItemList";
-import React from "react";
+import React, { use } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2 } from "lucide-react";
@@ -10,14 +10,15 @@ import { Id } from "@/convex/_generated/dataModel";
 import Header from "./_components/Header";
 import Body from "./_components/body/Body";
 import ChatInput from "./_components/input/ChatInput";
-type Props = {
-  params: {
-    conversationId: Id<"conversations">;
-  };
-};
-const Page = ({ params: { conversationId } }: Props) => {
 
-  console.log("conversationId:", conversationId); 
+type Props = {
+  params: Promise<{
+    conversationId: Id<"conversations">;
+  }>;
+};
+
+const Page = ({ params}: Props) => {
+  const { conversationId} = use(params);
   
   const conversation = useQuery(api.conversation.get, { id: conversationId });
   const conversations = useQuery(api.conversations.getAll);

@@ -11,10 +11,10 @@ export const useNavigation = () => {
   const paths = useMemo(
     () => [
       {
-        name: "dashboard",
+        name: "Conversation",
         href: "/",
         icon: <IoChatboxOutline />,
-        active: pathname === "/",
+        active: pathname.startsWith("/"),
       },
       {
         name: "Friends",

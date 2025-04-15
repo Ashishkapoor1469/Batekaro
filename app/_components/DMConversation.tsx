@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React from 'react'
 
 type Props = {
-    id:Id<"conversations">;
+    id: Id<"conversations">
     imageUrl:string;
     username:string
 }
