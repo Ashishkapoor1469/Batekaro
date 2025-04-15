@@ -1,7 +1,7 @@
 "use client";
 import ConverstaionContainer from "@/components/shared/converstaion/ConverstaionContainer";
 import ItemList from "@/components/shared/item-list/ItemList";
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2 } from "lucide-react";
@@ -10,6 +10,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import Header from "./_components/Header";
 import Body from "./_components/body/Body";
 import ChatInput from "./_components/input/ChatInput";
+import RemoveFriendDialog from "./_components/dialogs/RemoveFriendDialog";
 
 type Props = {
   params: Promise<{
@@ -22,6 +23,11 @@ const Page = ({ params}: Props) => {
   
   const conversation = useQuery(api.conversation.get, { id: conversationId });
   const conversations = useQuery(api.conversations.getAll);
+
+  const [removeFdo, setremoveFdo] = useState(false);
+  const [deleteFdo, setdeleteFdo] = useState(false);
+  const [leaveGroupFdo, setleaveGroupFdo] = useState(false);
+  // const [callType, setcallType] = useState<"audio"|"vedio"|null>(null);
   return (
     <div className="py-4 flex w-full h-full lg:pe-4 gap-4">
       <div className="lg:block hidden">
@@ -39,6 +45,8 @@ const Page = ({ params}: Props) => {
                     id={conversation.conversation._id}
                     username={conversation.otherMembers?.name || ""}
                     imageUrl={conversation.otherMembers?.imageUrl || ""}
+                    lastMessageContet={conversation.lastMessage?.content}
+                    lastMessageSender={conversation.lastMessage?.sender}
                   />
                 );
               })
@@ -58,6 +66,7 @@ const Page = ({ params}: Props) => {
   </p>
 ) : (
   <ConverstaionContainer>
+    <RemoveFriendDialog conversationId={conversationId} open={removeFdo} setOpen={setremoveFdo}/>
     <Header
       name={
         (conversation.isGroup
@@ -69,6 +78,29 @@ const Page = ({ params}: Props) => {
           ? undefined
           : conversation.otherMember?.imageUrl
       }
+      options={conversation.isGroup?[
+        {
+          label:"Leave Group",
+          distructive:false,
+          onclick:()=>{
+            setleaveGroupFdo(true)
+          },
+        },
+        {
+          label:"Delete Group",
+          distructive:true,
+          onclick:()=>{
+            setdeleteFdo(true)
+          },
+        },
+        {
+          label:"Remove friend",
+          distructive:true,
+          onclick:()=>{
+            setremoveFdo(true)
+          },
+        }
+      ]:[]}
     />
     <Body />
     <ChatInput />
