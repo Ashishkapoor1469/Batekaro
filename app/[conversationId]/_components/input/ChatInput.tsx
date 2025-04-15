@@ -40,12 +40,12 @@ const ChatInput = () => {
     },
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value, selectionStart } = e.target;
-    if (selectionStart !== null) {
-      form.setValue("content", value);
-    }
-  };
+  // const handleInputChange = (e: any) => {
+  //   const { value, selectionStart } = e.target;
+  //   if (selectionStart !== null) {
+  //     form.setValue("content", value);
+  //   }
+  // };
 
   const handleSubmit = async (values: z.infer<typeof chatMessageSchema>) => {
     createMessage({
@@ -87,8 +87,8 @@ const ChatInput = () => {
                         rows={1}
                         maxRows={3}
                         {...field}
-                        onChange={handleInputChange}
-                        onClick={handleInputChange}
+                        // onChange={handleInputChange}
+                        // onClick={handleInputChange}
                         placeholder="Type a message..."
                         className="min-h-full w-full resize-none border-0 outline-0 bg-card text-card-foreground placeholder:text-muted-foreground p-1.5"
                       />
