@@ -40,7 +40,7 @@ const ChatInput = () => {
     },
   });
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value, selectionStart } = e.target;
     if (selectionStart !== null) {
       form.setValue("content", value);
