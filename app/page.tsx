@@ -53,6 +53,8 @@ export default function Home() {
                       id={conversation.conversation._id}
                       username={conversation.otherMembers?.name || ""}
                       imageUrl={conversation.otherMembers?.imageUrl || ""}
+                      lastMessageContet={conversation.lastMessage?.content}
+                      lastMessageSender={conversation.lastMessage?.sender}
                     />
                   );
                 })

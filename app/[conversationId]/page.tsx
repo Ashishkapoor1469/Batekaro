@@ -25,8 +25,8 @@ const Page = ({ params}: Props) => {
   const conversations = useQuery(api.conversations.getAll);
 
   const [removeFdo, setremoveFdo] = useState(false);
-  const [deleteFdo, setdeleteFdo] = useState(false);
-  const [leaveGroupFdo, setleaveGroupFdo] = useState(false);
+  // const [deleteFdo, setdeleteFdo] = useState(false);
+  // const [leaveGroupFdo, setleaveGroupFdo] = useState(false);
   // const [callType, setcallType] = useState<"audio"|"vedio"|null>(null);
   return (
     <div className="py-4 flex w-full h-full lg:pe-4 gap-4">
@@ -79,20 +79,20 @@ const Page = ({ params}: Props) => {
           : conversation.otherMember?.imageUrl
       }
       options={conversation.isGroup?[
-        {
-          label:"Leave Group",
-          distructive:false,
-          onclick:()=>{
-            setleaveGroupFdo(true)
-          },
-        },
-        {
-          label:"Delete Group",
-          distructive:true,
-          onclick:()=>{
-            setdeleteFdo(true)
-          },
-        },
+        // {
+        //   label:"Leave Group",
+        //   distructive:false,
+        //   onclick:()=>{
+        //     setleaveGroupFdo(true)
+        //   },
+        // },
+        // {
+        //   label:"Delete Group",
+        //   distructive:true,
+        //   onclick:()=>{
+        //     setdeleteFdo(true)
+        //   },
+        // },
         {
           label:"Remove friend",
           distructive:true,

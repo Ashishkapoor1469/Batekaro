@@ -12,7 +12,7 @@ import { useMutationState } from "@/hooks/useMutationState";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ConvexError } from "convex/values";
 import type React from "react";
-import { useRef } from "react";
+// import { useRef } from "react";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -26,7 +26,7 @@ const chatMessageSchema = z.object({
 });
 
 const ChatInput = () => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  // const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { conversationId } = useConvresation();
   const { mutate: createMessage, pending } = useMutationState(
@@ -40,7 +40,7 @@ const ChatInput = () => {
     },
   });
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value, selectionStart } = e.target;
     if (selectionStart !== null) {
       form.setValue("content", value);
@@ -88,7 +88,6 @@ const ChatInput = () => {
                         maxRows={3}
                         {...field}
                         onChange={handleInputChange}
-                        onClick={handleInputChange}
                         placeholder="Type a message..."
                         className="min-h-full w-full resize-none border-0 outline-0 bg-card text-card-foreground placeholder:text-muted-foreground p-1.5"
                       />
