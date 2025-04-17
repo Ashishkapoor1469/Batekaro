@@ -4,7 +4,7 @@ import { ClerkProvider, SignedOut, SignIn, useAuth } from "@clerk/nextjs";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { Authenticated, AuthLoading, ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
-import { Loader2 } from "lucide-react";
+import { LoaderPinwheel } from "lucide-react";
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 export default function ConvexClientProvider({
@@ -19,7 +19,7 @@ export default function ConvexClientProvider({
           <div className="min-w-screen min-h-screen flex justify-center items-center"><SignIn/></div>
         </SignedOut>
         <Authenticated>{children}</Authenticated>
-         <AuthLoading><div className="min-w-screen min-h-screen flex justify-center items-center"><Loader2  className="h-12 w-12 animate-spin"/></div></AuthLoading>
+         <AuthLoading><div className="min-w-screen min-h-screen flex flex-col justify-center items-center gap-2.5"><p className="font-bold text-4xl">Please Wait...</p><LoaderPinwheel className="h-11 w-11 animate-spin"/></div></AuthLoading>
       </ConvexProviderWithClerk>
     </ClerkProvider>
   );
