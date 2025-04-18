@@ -49,7 +49,7 @@ export default function DashboardPage() {
                   <p><strong>Email:</strong> {userData.email}</p>
                   <p><strong>User ID:</strong> {userData._id}</p>
                   <p><strong>Role:</strong> {userData.role || "Member"}</p>
-                  <p><strong>Joined:</strong> {new Date(userData.createdAt).toLocaleDateString()}</p>
+                  <p><strong>Joined:</strong> {new Date(userData._creationTime).toLocaleDateString()}</p>
                 </div>
               </div>
             </div>
