@@ -17,7 +17,7 @@ const Page = () => {
         {requests === undefined ? (
           <Loader2 className="h-8 w-8 animate-spin" />
         ) : requests.length === 0 ? (
-          <p className="w-full h-full flex items-center">
+          <p className="w-full h-full flex items-center text-center">
             No Friends request Found
           </p>
         ) : (
