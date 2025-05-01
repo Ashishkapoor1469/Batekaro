@@ -14,7 +14,7 @@ const Body = () => {
 
   })
   return (
-    <Card className="flex-1 w-full flex-col-reverse overflow-y-auto gap-2 p-4">
+    <Card className="flex-1 w-full flex-col-reverse overflow-y-scroll gap-2 p-4">
      {messages?.map(({message,senderImage,senderName,isCurrentUser},index)=>{
       const lastByUser = messages[index-1]?.message.senderId === messages[index].message.senderId
      
